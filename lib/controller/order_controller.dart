@@ -34,6 +34,9 @@ class OrderController extends ChangeNotifier {
         orders.add(orderss);
       }
     }
+    orders.sort(
+      (a, b) => b.madeorderon.toDate().compareTo(a.madeorderon.toDate()),
+    );
     await fetchorderproduct();
     setbill();
     await fetchaddress();

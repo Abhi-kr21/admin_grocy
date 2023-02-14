@@ -68,7 +68,10 @@ class ProductController extends ChangeNotifier {
   }
 
   productValueChanged(
-      {required String name,
+      {required bool trending,
+      required bool bestselling,
+      required bool frequentbuy,
+      required String name,
       required int price,
       required int quantity,
       required double weight,
@@ -77,11 +80,17 @@ class ProductController extends ChangeNotifier {
       required String productId}) async {
     try {
       await productDb.doc(productId).update({
+        "bestselling": bestselling,
+        "frequentbuy": frequentbuy,
+        "trending": trending,
         "productname": name,
         "prize": price,
         "quantity": quantity,
         "weight": weight,
       });
+      productList[categoryid]![index].trending = trending;
+      productList[categoryid]![index].frequentbuy = frequentbuy;
+      productList[categoryid]![index].bestselling = bestselling;
       productList[categoryid]![index].productname = name;
       productList[categoryid]![index].prize = price;
       productList[categoryid]![index].qty = quantity;

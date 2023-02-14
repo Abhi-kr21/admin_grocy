@@ -11,10 +11,16 @@ class ProductScreen extends StatelessWidget {
   final catId;
   final index;
   final productId;
+  bool frequentbuy;
+  bool bestselling;
+  bool trendig;
   TextEditingController namecontroller = TextEditingController();
   TextEditingController pricecontroller = TextEditingController();
   TextEditingController quantitycontroller = TextEditingController();
   TextEditingController weightcontroller = TextEditingController();
+  TextEditingController frequentbuycontroller = TextEditingController();
+  TextEditingController bestsellingcontroller = TextEditingController();
+  TextEditingController trendingcontroller = TextEditingController();
 
   ProductScreen(
       {super.key,
@@ -25,7 +31,10 @@ class ProductScreen extends StatelessWidget {
       required this.weight,
       required this.catId,
       required this.index,
-      required this.productId});
+      required this.productId,
+      required this.bestselling,
+      required this.frequentbuy,
+      required this.trendig});
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +42,9 @@ class ProductScreen extends StatelessWidget {
     pricecontroller.text = price.toString();
     quantitycontroller.text = quantity.toString();
     weightcontroller.text = weight.toString();
-
+    bestsellingcontroller.text = bestselling.toString();
+    frequentbuycontroller.text = frequentbuy.toString();
+    trendingcontroller.text = trendig.toString();
     return Scaffold(
         appBar: AppBar(
           title: Text("Product name"),
@@ -130,12 +141,74 @@ class ProductScreen extends StatelessWidget {
                   SizedBox(
                     height: 15,
                   ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 10),
+                    child: TextFormField(
+                      controller: trendingcontroller,
+                      decoration: InputDecoration(
+                          labelText: "Istrending",
+                          border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(20))),
+                      validator: (value) {
+                        if (value!.isEmpty) {
+                          return "cannot be empty";
+                        }
+                        return null;
+                      },
+                    ),
+                  ),
+                  SizedBox(
+                    height: 15,
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 10),
+                    child: TextFormField(
+                      controller: frequentbuycontroller,
+                      decoration: InputDecoration(
+                          labelText: "frequent buy",
+                          border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(20))),
+                      validator: (value) {
+                        if (value!.isEmpty) {
+                          return "cannot be empty";
+                        }
+                        return null;
+                      },
+                    ),
+                  ),
+                  SizedBox(
+                    height: 15,
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 10),
+                    child: TextFormField(
+                      controller: bestsellingcontroller,
+                      decoration: InputDecoration(
+                          labelText: "Best selling",
+                          border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(20))),
+                      validator: (value) {
+                        if (value!.isEmpty) {
+                          return "cannot be empty";
+                        }
+                        return null;
+                      },
+                    ),
+                  ),
+                  SizedBox(
+                    height: 15,
+                  ),
                   Consumer<ProductController>(
                     builder: (context, productcontroller, child) {
                       return MaterialButton(
                         color: Colors.blue,
                         onPressed: () {
                           productcontroller.productValueChanged(
+                              trending: trendingcontroller.text.isNotEmpty,
+                              frequentbuy:
+                                  frequentbuycontroller.text.isNotEmpty,
+                              bestselling:
+                                  bestsellingcontroller.text.isNotEmpty,
                               name: namecontroller.text,
                               price: int.parse(pricecontroller.text),
                               quantity: int.parse(quantitycontroller.text),

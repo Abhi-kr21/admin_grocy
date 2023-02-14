@@ -5,7 +5,21 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class OrderScreen extends StatelessWidget {
-  const OrderScreen({super.key});
+  OrderScreen({super.key});
+  final Map<int, String> month = {
+    1: "January",
+    2: "february",
+    3: "March",
+    4: "April",
+    5: "May",
+    6: "June",
+    7: "July",
+    8: "August",
+    9: "September",
+    10: "October",
+    11: "November",
+    12: "December"
+  };
 
   @override
   Widget build(BuildContext context) {
@@ -39,7 +53,7 @@ class OrderScreen extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
                           children: [
                             Text(
-                                "Date:${ordercontrolller.orders[index].madeorderon.toDate()}"),
+                                "Date:${ordercontrolller.orders[index].madeorderon.toDate().day} / ${month[ordercontrolller.orders[index].madeorderon.toDate().month]} / ${ordercontrolller.orders[index].madeorderon.toDate().year}"),
                             Text(
                                 " Order id :${ordercontrolller.orders[index].orderid}"),
                             Text(

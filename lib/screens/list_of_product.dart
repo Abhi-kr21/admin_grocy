@@ -35,83 +35,77 @@ class ListOfProductScreen extends StatelessWidget {
             }
             switch (productcontroller.productStatusmap[catId]!) {
               case ProductStatus.DONE:
-                return SingleChildScrollView(
-                  child: Column(
-                    children: [
-                      GridView.builder(
-                        shrinkWrap: true,
-                        gridDelegate:
-                            const SliverGridDelegateWithFixedCrossAxisCount(
-                          // crossAxisSpacing: 10,
-                          mainAxisExtent: 250,
-                          //  childAspectRatio: 0.98,
-                          crossAxisCount: 2,
-                        ),
-                        itemCount: productcontroller.productList[catId]!.length,
-                        itemBuilder: (BuildContext context, int index) {
-                          return InkWell(
-                            onTap: () {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => ProductScreen(
-                                      image: product[index].image,
-                                      // name: productcontroller.productList[catId]![index].productname,
-                                      name: product[index].productname,
-                                      price: product[index].prize,
-                                      quantity: product[index].qty,
-                                      weight: product[index].weigth!,
-                                      catId: catId,
-                                      index: index,
-                                      productId: product[index].productid,
-                                    ),
-                                  ));
-                            },
-                            child: Container(
-                              height: 100,
-                              width: 200,
-                              margin: EdgeInsets.all(10),
-                              decoration: BoxDecoration(
-                                  color: Colors.amberAccent,
-                                  borderRadius: BorderRadius.circular(15)),
-                              child: Column(
-                                children: [
-                                  ClipRRect(
-                                    borderRadius: BorderRadius.circular(15),
-                                    child: Image.network(
-                                      product![index].image,
-                                      height: 140,
-                                      width: double.infinity,
-                                      fit: BoxFit.cover,
-                                    ),
-                                  ),
-                                  const SizedBox(
-                                    height: 5,
-                                  ),
-                                  Text(product[index].productname),
-                                  const SizedBox(
-                                    height: 5,
-                                  ),
-                                  Text(
-                                      "Price ${product[index].prize.toString()}"),
-                                  const SizedBox(
-                                    height: 5,
-                                  ),
-                                  Text(
-                                      "Quantity ${product[index].qty.toString()}"),
-                                  const SizedBox(
-                                    height: 5,
-                                  ),
-                                  Text(
-                                      " Weight ${product[index].weigth.toString()}gm"),
-                                ],
+                return GridView.builder(
+                  shrinkWrap: true,
+                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                    // crossAxisSpacing: 10,
+                    mainAxisExtent: 250,
+                    //  childAspectRatio: 0.98,
+                    crossAxisCount: 2,
+                  ),
+                  itemCount: productcontroller.productList[catId]!.length,
+                  itemBuilder: (BuildContext context, int index) {
+                    return InkWell(
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => ProductScreen(
+                                bestselling: product[index].bestselling,
+                                trendig: product[index].trending,
+                                frequentbuy: product[index].frequentbuy,
+                                image: product[index].image,
+                                // name: productcontroller.productList[catId]![index].productname,
+                                name: product[index].productname,
+                                price: product[index].prize,
+                                quantity: product[index].qty,
+                                weight: product[index].weigth!,
+                                catId: catId,
+                                index: index,
+                                productId: product[index].productid,
+                              ),
+                            ));
+                      },
+                      child: Container(
+                        height: 100,
+                        width: 200,
+                        margin: EdgeInsets.all(10),
+                        decoration: BoxDecoration(
+                            color: Colors.amberAccent,
+                            borderRadius: BorderRadius.circular(15)),
+                        child: Column(
+                          children: [
+                            ClipRRect(
+                              borderRadius: BorderRadius.circular(15),
+                              child: Image.network(
+                                product![index].image,
+                                height: 140,
+                                width: double.infinity,
+                                fit: BoxFit.cover,
                               ),
                             ),
-                          );
-                        },
+                            const SizedBox(
+                              height: 5,
+                            ),
+                            Text(product[index].productname),
+                            const SizedBox(
+                              height: 5,
+                            ),
+                            Text("Price ${product[index].prize.toString()}"),
+                            const SizedBox(
+                              height: 5,
+                            ),
+                            Text("Quantity ${product[index].qty.toString()}"),
+                            const SizedBox(
+                              height: 5,
+                            ),
+                            Text(
+                                " Weight ${product[index].weigth.toString()}gm"),
+                          ],
+                        ),
                       ),
-                    ],
-                  ),
+                    );
+                  },
                 );
               case ProductStatus.LOADING:
                 print("loading");
