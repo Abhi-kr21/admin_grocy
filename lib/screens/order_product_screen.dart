@@ -10,6 +10,7 @@ class OrderProductScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
+          backgroundColor: Colors.redAccent,
           title: Text("Products"),
         ),
         body: Consumer<OrderController>(
@@ -24,21 +25,36 @@ class OrderProductScreen extends StatelessWidget {
                   return Container(
                     height: 100,
                     width: double.infinity,
-                    color: Colors.amberAccent,
+                    decoration: BoxDecoration(
+                      color: Colors.amberAccent,
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    margin: EdgeInsets.all(5),
                     child: Row(
                       children: [
-                        Image.network(
-                          ordercontroller.orderproduct[index][pndex].image,
-                          height: 100,
+                        Padding(
+                          padding: const EdgeInsets.all(3.0),
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(10),
+                            child: Image.network(
+                              ordercontroller.orderproduct[index][pndex].image,
+                              height: 100,
+                            ),
+                          ),
+                        ),
+                        SizedBox(
+                          width: 10,
                         ),
                         Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            Text("Name : " +
-                                ordercontroller
-                                    .orderproduct[index][pndex].productname),
-                            Text("price :" +
-                                ordercontroller.orderproduct[index][pndex].prize
-                                    .toString()),
+                            Text(
+                                "Name : ${ordercontroller.orderproduct[index][pndex].productname}"),
+                            SizedBox(
+                              height: 10,
+                            ),
+                            Text(
+                                "Price : ${ordercontroller.orderproduct[index][pndex].prize}"),
                           ],
                         ),
                       ],

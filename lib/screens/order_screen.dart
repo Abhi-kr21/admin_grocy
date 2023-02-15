@@ -25,7 +25,7 @@ class OrderScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text("Orders Screen"),
+          title: const Text("Orders Screen"),
           backgroundColor: Colors.redAccent,
         ),
         body: Consumer<OrderController>(
@@ -33,7 +33,7 @@ class OrderScreen extends StatelessWidget {
             if (ordercontrolller.orderstatus == OrderStatus.NIL) {
               ordercontrolller.fetchorders();
 
-              return CircularProgressIndicator();
+              return const Center(child: CircularProgressIndicator());
             } else {
               switch (ordercontrolller.orderstatus) {
                 case OrderStatus.DONE:
@@ -48,7 +48,7 @@ class OrderScreen extends StatelessWidget {
                         decoration: BoxDecoration(
                             color: Colors.amberAccent,
                             borderRadius: BorderRadius.circular(15)),
-                        margin: EdgeInsets.all(10),
+                        margin: const EdgeInsets.all(10),
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
                           children: [
@@ -70,7 +70,7 @@ class OrderScreen extends StatelessWidget {
                                 "Address${ordercontrolller.address[index].addressline}"),
                             Text("bill:${ordercontrolller.bill[index]}"),
                             MaterialButton(
-                              color: Colors.blue,
+                              color: Colors.lightBlue[100],
                               onPressed: () {
                                 Navigator.push(
                                     context,
@@ -79,7 +79,7 @@ class OrderScreen extends StatelessWidget {
                                           OrderProductScreen(index: index),
                                     ));
                               },
-                              child: Text("View Product"),
+                              child: const Text("View Product"),
                             )
                           ],
                         ),
@@ -88,9 +88,9 @@ class OrderScreen extends StatelessWidget {
                   );
 
                 case OrderStatus.LOADING:
-                  return CircularProgressIndicator();
+                  return const Center(child: CircularProgressIndicator());
                 case OrderStatus.NIL:
-                  return CircularProgressIndicator();
+                  return const CircularProgressIndicator();
               }
             }
           },
